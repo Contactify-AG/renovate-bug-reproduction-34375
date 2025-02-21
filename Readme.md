@@ -2,11 +2,11 @@
 
 ## Current behavior
 
-Renovate Bot only creates a PR ffor updating `azurerm`, but only updates the file in `modules/common/main.tf` and not in `modules/certificate/main.tf`.
+Renovate Bot ignores the `main.tf` if there is a resources using a [provider function](https://opentofu.org/docs/language/functions/#provider-defined-functions).
 
 ## Expected behavior
 
-I expect the PR to update both files.
+I expect renovate to pick up the terraform provider, regardless of the terraform config.
 
 ## Link to the Renovate issue or Discussion
 
