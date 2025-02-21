@@ -1,29 +1,29 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
+  extends: [
     "config:best-practices",
     ":semanticCommits",
     "group:allNonMajor",
-    ":enableVulnerabilityAlertsWithLabel(High priority)"
+    ":enableVulnerabilityAlertsWithLabel(High priority)",
   ],
-  "packageRules": [
+  packageRules: [
     {
-      "matchUpdateTypes": ["minor", "patch", "digest"],
-      "automerge": true
+      matchUpdateTypes: ["minor", "patch", "digest"],
+      automerge: true,
     },
     {
-      "matchUpdateTypes": ["digest"],
-      "minimumReleaseAge": "1 day"
+      matchUpdateTypes: ["digest"],
+      minimumReleaseAge: "1 day",
     },
     {
-      "matchDatasources": ["terraform-provider"],
-      "registryUrls": ["https://registry.opentofu.org"]
-    }
+      matchDatasources: ["terraform-provider"],
+      registryUrls: ["https://registry.opentofu.org"],
+    },
   ],
-  "platformAutomerge": true,
-  "prHourlyLimit": 0,
-  "rebaseWhen": "behind-base-branch",
-  "dependencyDashboard": false,
+  platformAutomerge: true,
+  prHourlyLimit: 0,
+  rebaseWhen: "behind-base-branch",
+  dependencyDashboard: false,
   packageRules: [
     {
       groupSlug: "opentofu",
