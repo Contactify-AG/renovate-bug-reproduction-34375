@@ -24,10 +24,6 @@
   "prHourlyLimit": 0,
   "rebaseWhen": "behind-base-branch",
   "dependencyDashboard": false,
-  includePaths: [
-    "modules/certificate/**",
-    "modules/common/**",
-  ],
   packageRules: [
     {
       groupSlug: "opentofu",
