@@ -1,29 +1,6 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: [
-    "config:best-practices",
-    ":semanticCommits",
-    "group:allNonMajor",
-    ":enableVulnerabilityAlertsWithLabel(High priority)",
-  ],
-  packageRules: [
-    {
-      matchUpdateTypes: ["minor", "patch", "digest"],
-      automerge: true,
-    },
-    {
-      matchUpdateTypes: ["digest"],
-      minimumReleaseAge: "1 day",
-    },
-    {
-      matchDatasources: ["terraform-provider"],
-      registryUrls: ["https://registry.opentofu.org"],
-    },
-  ],
-  platformAutomerge: true,
-  prHourlyLimit: 0,
-  rebaseWhen: "behind-base-branch",
-  dependencyDashboard: false,
+  extends: ["local>Contactify-AG/renovate-config"],
   packageRules: [
     {
       groupSlug: "opentofu",
@@ -33,6 +10,24 @@
         'Please remember to run `tofu init -upgrade` on the files that were changed.  \nYou can do it with this oneliner: `cd customers && for dir in */; do (cd "$dir" && echo "Executing \'tofu init -upgrade\' in $dir..." && tofu init -upgrade); done`.\n\nThen please check if opentofu wants to change anything.\n\n:warning: Please also check if renovate-bot caught the opentofu version in the github actions workflows.',
       ],
       labels: ["manual", "renovate-bot"],
+    },
+    {
+      groupSlug: "weblate",
+      matchManagers: ["custom.regex"],
+      automerge: false,
+      labels: ["manual", "renovate-bot"],
+      matchDepNames: ["weblateorg/weblate**"],
+    },
+  ],
+  customManagers: [
+    {
+      customType: "regex",
+      fileMatch: ["weblate\\.tf$"],
+      matchStrings: [
+        'docker_image_name\\s*=\\s*"(?<depName>.*?):(?:.*?)(?<currentValue>.*?)(?:@(?<currentDigest>.*?))?"\\s*docker_registry_url\\s*=\\s*"(?<registryUrl>.*?)"',
+      ],
+      datasourceTemplate: "docker",
+      versioningTemplate: "docker",
     },
   ],
 }
