@@ -2,11 +2,11 @@
 
 ## Current behavior
 
-Renovate Bot ignores the `main.tf` if there is a resources using a [provider function](https://opentofu.org/docs/language/functions/#provider-defined-functions).
+Renovate Bot fails to parse the `main.tf` if there is a resources using a [provider function](https://opentofu.org/docs/language/functions/#provider-defined-functions).
 
 ## Expected behavior
 
-I expect renovate to pick up the terraform provider, regardless of the terraform config.
+I expect renovate successfully update the provider, regardless of the terraform config.
 
 ## Link to the Renovate issue or Discussion
 
